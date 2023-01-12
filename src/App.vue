@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import PCWeb from "@/components/PCWeb";
+import PCWeb from "@/components/PC/PCWeb";
 import PhoneWeb from "@/components/PhoneWeb";
 
 export default {
