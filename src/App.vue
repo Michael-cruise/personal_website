@@ -1,11 +1,14 @@
 <template>
   <PCWeb v-if="!PhoneWebMode" />
   <PhoneWeb v-if="PhoneWebMode"/>
+  <a href="https://beian.miit.gov.cn/" style="position: absolute;height: 2%;width: 100%;left: 0;bottom: 2%">
+    <h5 style="color: #333;background: #1b2326">沪ICP备19002129号-3</h5>
+  </a>
 </template>
 
 <script>
 import PCWeb from "@/components/PC/PCWeb";
-import PhoneWeb from "@/components/PhoneWeb";
+import PhoneWeb from "@/components/Phone/PhoneWeb";
 
 export default {
   name: 'App',

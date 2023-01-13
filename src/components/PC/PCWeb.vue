@@ -1,123 +1,47 @@
 <template>
   <div>
-    <div class="echarts-box">
-      <div id="myEcharts" :style="{ width: '900px', height: '300px' }"></div>
+    <div style="display: flex;width: 100%;flex-wrap: wrap">
+      <LeftUp/>
+      <MiddleUp/>
+      <RightUp/>
+      <LeftCenter/>
+      <MiddleCenter/>
+      <RightCenter/>
+      <LeftDown/>
+      <MiddleDown/>
+      <RightDown/>
     </div>
   </div>
 </template>
 
 <script>
-import * as echarts from "echarts";
-import * as axios from "core-js";
+import LeftUp from "@/components/PC/LeftComponent/LeftUp";
+import MiddleUp from "@/components/PC/MiddleComponent/MiddleUp";
+import RightUp from "@/components/PC/RightComponent/RightUp";
+import LeftCenter from "@/components/PC/LeftComponent/LeftCenter";
+import MiddleCenter from "@/components/PC/MiddleComponent/MiddleCenter";
+import RightCenter from "@/components/PC/RightComponent/RightCenter";
+import LeftDown from "@/components/PC/LeftComponent/LeftDown";
+import MiddleDown from "@/components/PC/MiddleComponent/MiddleDown";
+import RightDown from "@/components/PC/RightComponent/RightDown";
+import axios from "axios";
 export default {
   name: "PCWeb",
-
+  components: {
+    // eslint-disable-next-line vue/no-unused-components
+    LeftUp,LeftCenter, LeftDown, MiddleUp, MiddleCenter, MiddleDown, RightUp, RightCenter, RightDown,
+  },
   mounted() {
-    echarts.init(document.getElementById("myEcharts"), "dark").setOption({
-      title: [
-        {
-          top: '5%',
-          left: 'center',
-          text: '10日温度预报'
-        },
-      ],
-      visualMap: [
-        {
-          show: false,
-          type: 'continuous',
-          seriesIndex: 0,
-          min: 10,
-          max: 20
-        },
-        {
-          show: false,
-          type: 'continuous',
-          seriesIndex: 1,
-          min: 10,
-          max: 20
-        },
-      ],
-      xAxis: {
-        data: [
-          "今天",
-          "周五",
-          "周六",
-          "周日",
-          "周一",
-          "周二",
-          "周三",
-          "周四",
-          "周五",
-          "周六",
-        ]
-      },
-      yAxis: {
-        type: 'value',
-        axisLabel: {
-          formatter: '{value} °C'
-        }
-      },
-      tooltip: {
-      },
-      series: [
-        {
-          name: 'Highest',
-          data: [
-            21,
-            18,
-            12,
-            4,
-            5,
-            7,
-            9,
-            10,
-            8,
-            7,
-          ],
-          type: "line",
-          smooth: true,
-          markLine: {
-            data: [{ type: 'average', name: 'Avg' }]
-          },
-          markPoint: {
-            data: [{ name: '周最高', value: '21°C', xAxis: 0, yAxis: 21 }]
-          },
-        },
-        {
-          name: 'Lowest',
-          data: [
-            10,
-            12,
-            4,
-            0,
-            -1,
-            -1,
-            -1,
-            1,
-            0,
-            1,
-          ],
-          type: "line",
-          smooth: true,
-          markLine: {
-            data: [{ type: 'average', name: 'Avg' }]
-          },
-          markPoint: {
-            data: [{ name: '周最低', value: '-1°C', xAxis: 4, yAxis: -1 }]
-          },
-        }
-      ]
-    });
-
     this.getData();
   },
   methods: {
-    getData() { // 从服务的加载数的方法。
-      // /static后什么不加，会被代理到http://tzb.xxu.edu.cn/dptt.htm
-      axios.get()
-          .then(e => {
-            console.log(e)
-          });
+    getData() {
+      axios.get("https://devapi.qweather.com/v7/weather/3d?location=121.3,31.15&key=3433aa0d8fbd40f0b3f592e979b148d5")
+          .then(resp => {
+            console.log(resp );
+            //转为jquery对象
+          })
+      console.log(1)
     }
   }
 }
